@@ -30,4 +30,4 @@ export const ROTA = {
 
 //criar rotas de forma dinâmica para os endpoints
 //recurso, URLs, URI....
-// concatenar = '/rest/sistema/cidade/buscar/:id'
+// concatenar = '/rest/sistema/usuario/buscar/:id'

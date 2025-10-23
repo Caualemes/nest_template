@@ -9,7 +9,7 @@ export interface Result<T> {
 }
 
 // Classe Genérica - consegue trabalhar com
-// qualquer tipo de objeto - Cidade, Usuário, Professor, Disciplina
+// qualquer tipo de objeto - Usuario, Usuário, Professor, Disciplina
 // Aluno --- etc.
 
 export class Mensagem<T> {
