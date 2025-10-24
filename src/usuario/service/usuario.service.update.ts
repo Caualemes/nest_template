@@ -24,7 +24,9 @@ export class UsuarioServiceUpdate {
       throw new HttpException('Usuario não cadastrada', HttpStatus.NOT_FOUND);
     }
 
-    const usuarioAtualizada = Object.assign(usuarioCadastrada, usuario);
+    const dadosAtualizados = Object.fromEntries(Object.entries(usuario).filter(([_, v]) => v !== undefined));
+
+    const usuarioAtualizada = Object.assign(usuarioCadastrada, dadosAtualizados);
 
     usuario = await this.usuarioRepository.save(usuarioAtualizada);
 
