@@ -11,14 +11,48 @@ export class UsuarioRequest {
   @MaxLength(10, {
     message: 'O tamanho máximo é de 10 caracteres para o código do usuario',
   })
-  codUsuario: string = '';
-
+  
   @IsNotEmpty({ message: 'Nome do usuario deve ser informado' })
   @IsString({ message: 'A informação só pode conter texto' })
   @MaxLength(50, {
     message: 'O tamanho máximo é de 50 caracteres para o nome do usuario',
   })
-  nomeUsuario: string = '';
+  nome: string = '';
+
+   @IsNotEmpty({ message: 'Nome do usuario deve ser informado' })
+  @IsString({ message: 'A informação só pode conter texto' })
+  @MaxLength(50, {
+    message: 'O tamanho máximo é de 50 caracteres para o nome do usuario',
+  })
+  email: string = '';
+
+   @IsNotEmpty({ message: 'Nome do usuario deve ser informado' })
+  @IsString({ message: 'A informação só pode conter texto' })
+  @MaxLength(50, {
+    message: 'O tamanho máximo é de 50 caracteres para o nome do usuario',
+  })
+  senha: string = '';
+
+   @IsNotEmpty({ message: 'Nome do usuario deve ser informado' })
+  @IsString({ message: 'A informação só pode conter texto' })
+  @MaxLength(50, {
+    message: 'O tamanho máximo é de 50 caracteres para o nome do usuario',
+  })
+  telefone: string = '';
+
+   @IsNotEmpty({ message: 'Nome do usuario deve ser informado' })
+  @IsString({ message: 'A informação só pode conter texto' })
+  @MaxLength(50, {
+    message: 'O tamanho máximo é de 50 caracteres para o nome do usuario',
+  })
+  endereco: string = '';
+
+   @IsNotEmpty({ message: 'Nome do usuario deve ser informado' })
+  @IsString({ message: 'A informação só pode conter texto' })
+  @MaxLength(50, {
+    message: 'O tamanho máximo é de 50 caracteres para o nome do usuario',
+  })
+  tipo: string = '';
 
   constructor(data: Partial<UsuarioRequest> = {}) {
     Object.assign(this, data);

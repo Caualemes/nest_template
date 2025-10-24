@@ -5,8 +5,20 @@ export class UsuarioResponse {
   idUsuario?: number;
 
   @Expose()
-  codUsuario: string = '';
+  nome: string = '';
 
   @Expose()
-  nomeUsuario: string = '';
+  email: string = '';
+
+  @Expose()
+  telefone: string = '';
+
+  @Expose()
+  senha: string = '';
+
+  @Expose()
+  endereco: string = '';
+
+  @Expose()
+  tipo: string = '';
 }

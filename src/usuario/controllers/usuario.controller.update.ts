@@ -19,6 +19,6 @@ export class UsuarioControllerUpdate {
     @Body() usuarioRequest: UsuarioRequest,
   ): Promise<Result<UsuarioResponse>> {
     const response = await this.usuarioServiceUpdate.update(id, usuarioRequest);
-    return MensagemSistema.showMensagem(HttpStatus.OK, 'Usuario alterada com sucesso !', response, res.path, null);
+    return MensagemSistema.showMensagem(HttpStatus.OK, 'Usuario alterado com sucesso !', response, res.path, null);
   }
 }

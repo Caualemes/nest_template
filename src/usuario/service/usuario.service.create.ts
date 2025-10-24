@@ -21,10 +21,6 @@ export class UsuarioServiceCreate {
       .where('usuario.nome =:nome', { nome: usuario.nome })
       .getOne();
 
-    if (usuarioCadastrada) {
-      throw new HttpException('Usuario com nome informada já está cadastrada', HttpStatus.BAD_REQUEST);
-    }
-
     usuario = await this.usuarioRepository.save(usuario);
 
     return ConverterUsuario.toUsuarioResponse(usuario);

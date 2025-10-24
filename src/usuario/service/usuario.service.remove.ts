@@ -23,7 +23,7 @@ export class UsuarioServiceRemove {
       .createQueryBuilder('usuario')
       .delete()
       .from(Usuario)
-      .where('usuario.ID_CIDADE =:idUsuario ', {
+      .where('usuario.ID_USUARIO =:idUsuario ', {
         idUsuario: usuario?.idUsuario,
       })
       .execute();

@@ -10,8 +10,12 @@ export class ConverterUsuario {
     if (usuarioRequest.idUsuario != null) {
       usuario.idUsuario = usuarioRequest.idUsuario;
     }
-    usuario.nomeUsuario = usuarioRequest.nomeUsuario;
-    usuario.codUsuario = usuarioRequest.codUsuario;
+    usuario.nome = usuarioRequest.nome;
+    usuario.email = usuarioRequest.email;
+    usuario.senha = usuarioRequest.senha;
+    usuario.telefone = usuarioRequest.telefone;
+    usuario.endereco = usuarioRequest.endereco;
+    usuario.tipo = usuarioRequest.tipo;
 
     return usuario;
   }
