@@ -1,8 +1,7 @@
-import { useState, useEffect } from 'react';
-import { RestauranteAPI } from '../../api/restaurante.api';
-import { Link } from 'react-router-dom';
-// Importa o tipo adaptado
-import type { Restaurante } from '../../types/restaurante'; 
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { RestauranteAPI } from "../../api/restaurante.api";
+import type { Restaurante } from "../../types/restaurante";
 
 export const ListRestaurante = () => {
   const [restaurantes, setRestaurantes] = useState<Restaurante[]>([]);
@@ -13,7 +12,6 @@ export const ListRestaurante = () => {
     try {
       setLoading(true);
       const response = await RestauranteAPI.getAll();
-      console.log('RESPOSTA DA API:', response.data);
       setRestaurantes(response.data.dados);
       setError(null);
     } catch (err) {
@@ -29,65 +27,87 @@ export const ListRestaurante = () => {
   }, []);
 
   const handleDelete = async (id: number) => {
-    if (!window.confirm('Tem certeza que deseja deletar este restaurante?')) {
+    if (!window.confirm("Tem certeza que deseja deletar este restaurante?"))
       return;
-    }
+
     try {
       await RestauranteAPI.delete(String(id));
-      alert('Restaurante deletado com sucesso!');
+      alert("Restaurante deletado com sucesso!");
       setRestaurantes(restaurantes.filter((rest) => rest.idRestaurante !== id));
     } catch (err) {
-      console.error('Erro ao deletar:', err);
-      alert('Não foi possível deletar o restaurante.');
+      console.error("Erro ao deletar:", err);
+      alert("Não foi possível deletar o restaurante.");
     }
   };
 
-  if (loading) return <p>Carregando...</p>;
-  if (error) return <p style={{ color: 'red' }}>{error}</p>;
+  if (loading)
+    return <p className="text-center mt-10 text-gray-600">Carregando...</p>;
+  if (error) return <p className="text-center mt-10 text-red-500">{error}</p>;
 
   return (
-    <div>
-      <h2>Lista de Restaurantes</h2>
-      <Link to="/restaurante/create">
-        <button>+ Adicionar Novo</button>
-      </Link>
-      
-      <table border={1} style={{ width: '100%', marginTop: '1rem' }}>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Nome</th>
-            <th>CNPJ</th>
-            <th>Telefone</th>
-            <th>Endereço</th>
-            <th>Funcionamento</th>
-            <th>Usuário Dono</th>
-            <th>Ações</th>
-          </tr>
-        </thead>
-        <tbody>
-          {restaurantes.map((rest) => (
-            <tr key={rest.idRestaurante}>
-              <td>{rest.idRestaurante}</td>
-              <td>{rest.nome}</td>
-              <td>{rest.cnpj}</td>
-              <td>{rest.telefone}</td>
-              <td>{rest.endereco}</td>
-              <td>{rest.horario_func}</td>
-              {/* Mostra o nome do usuário dono */}
-              <td>{rest.usuario?.nome} (ID)</td> 
-              <td>
-                <Link to={`/restaurante/edit/${rest.idRestaurante}`}>
-                  <button>Editar</button>
-                </Link>
-                <button onClick={() => handleDelete(rest.idRestaurante)}>
-                  Deletar
-                </button>
-              </td>
+    <div className="max-w-6xl mx-auto p-6">
+      {/* TÍTULO + BOTÃO */}
+      <div className="flex items-center justify-between mb-6">
+        <h2 className="text-3xl font-bold text-gray-800">
+          Lista de Restaurantes
+        </h2>
+
+        <Link to="/restaurante/create">
+          <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md shadow">
+            + Adicionar Novo
+          </button>
+        </Link>
+      </div>
+
+      {/* TABELA */}
+      <div className="overflow-x-auto shadow-md rounded-lg">
+        <table className="w-full text-left border-collapse">
+          <thead className="bg-gray-800 text-white">
+            <tr>
+              <th className="px-4 py-3">ID</th>
+              <th className="px-4 py-3">Nome</th>
+              <th className="px-4 py-3">CNPJ</th>
+              <th className="px-4 py-3">Telefone</th>
+              <th className="px-4 py-3">Endereço</th>
+              <th className="px-4 py-3">Funcionamento</th>
+              <th className="px-4 py-3">Usuário Dono</th>
+              <th className="px-4 py-3 text-center">Ações</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+
+          <tbody>
+            {restaurantes.map((rest, index) => (
+              <tr
+                key={rest.idRestaurante}
+                className={index % 2 === 0 ? "bg-gray-100" : "bg-white"}
+              >
+                <td className="px-4 py-3">{rest.idRestaurante}</td>
+                <td className="px-4 py-3">{rest.nome}</td>
+                <td className="px-4 py-3">{rest.cnpj}</td>
+                <td className="px-4 py-3">{rest.telefone}</td>
+                <td className="px-4 py-3">{rest.endereco}</td>
+                <td className="px-4 py-3">{rest.horario_func}</td>
+                <td className="px-4 py-3">{rest.usuario?.nome} (ID)</td>
+
+                <td className="px-4 py-3 flex gap-2 justify-center">
+                  <Link to={`/restaurante/edit/${rest.idRestaurante}`}>
+                    <button className="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded-md shadow">
+                      Editar
+                    </button>
+                  </Link>
+
+                  <button
+                    onClick={() => handleDelete(rest.idRestaurante)}
+                    className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded-md shadow"
+                  >
+                    Deletar
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
